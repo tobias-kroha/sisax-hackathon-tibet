@@ -13,3 +13,29 @@ cd sisax-hackathon
 pip install -e .
 ```
 
+Im `demo_notebook.ipynv` wird Objekterkennung und Interaktion mit einem LLM demonstriert. Es ist zu beachten, dass die entsprechende Keys, Hosts, Ports, etc. in der .env zu spezifizieren sind. Aktuell werden folgende Angaben benötigt:
+
+```bash
+OBJECT_DETECTION_HOST=http://...:8000
+OLLAMA_HOST=http://...
+OLLAMA_PORT=11434
+OPENAI_API_KEY=sk-proj-..
+```
+
+Die Namen der Hosts und API Keys werden am Anfang des Hackathons mitgeteilt.
+
+# Next steps
+Ihr könnt das vorliegende Python Paket um weitere Funktionalitän erweitern. Beispielsweise sind folgendes **Features** sinnvoll:
+- simples WebUI mit [Flask](https://github.com/pallets/flask) oder [gradio](https://github.com/gradio-app/gradio)
+- Auslesen der Webcam per [opencv](https://github.com/opencv/opencv-python)
+
+# Mögliche Bibliotheken und Tools
+Die nachfolge Auflisting ist eher als Inspiration gedacht. Es gibt eine große Menge an open-source Tools für verschiedene Aufgaben. Teils gibt es schon Ansätze wie lang-segment-anything oder GPT4o, die ohne fine-tuning (d.h. Training auf GPU) zur Erkennung von Spielkarten verwendet werden können. Fine-tuning von YoloV11 mit `Ultralytics` oder dem neuesten Ansatz `GLEE` könnte jedoch eine deutlich höhere Genauigkeit versprechen.
+
+- Layout-Analyse
+  - [unstructured](https://github.com/Unstructured-IO/unstructured)
+  - [LayoutReader](https://github.com/ppaanngggg/layoutreader?tab=readme-ov-file)
+- Objekterkennung
+  - [ultralytics](https://github.com/ultralytics) (fine-tuning notwendig)
+  - [Glee](https://github.com/FoundationVision/GLEE) (fine-tuning notwendig)
+  - [Lang-Segment-Anything](https://github.com/luca-medeiros/lang-segment-anything)  
