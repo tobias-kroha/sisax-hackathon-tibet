@@ -1,9 +1,17 @@
-![Banner](https://github.com/nih23/Chatbot-Hackathon/blob/main/res/Banner.jpg?raw=true)
+![Banner](https://github.com/nih23/sisax-hackathon/blob/main/assets/Banner.jpg?raw=true)
 
 # Chatbot-Hackathon
+Der Hackathon besteht aus zwei Richtungen: 
+1. Analyse von Blockdrucken und Handschriften
+2. KI am Tisch: Skat trifft Machine Learning!
 
-Beim Skat-Hackathon entwickelst du in einem Team eine KI, die in der Lage ist, Skat-Karten auf der Hand und auf dem Tisch zu erkennen – und das alles in Echtzeit! Mit Hilfe modernster Objekterkennungsmodelle wie YOLO, SAM2 und GroundingDino erfasst deine KI die Spielkarten und entscheidet, welche Karte als nächstes gespielt werden soll. Mithilfe von leistungsstarken Large Language Models (LLMs), darunter selbst gehostete Open-Source-Modelle, wird deine KI auch die optimale Spielstrategie entwickeln.
+Gemeinsam mit der [@StabiBerlin](https://github.com/StabiBerlin) wollen wir **historische Dokumente mit KI** erkunden! In diesem Hackathon kombinieren wir modernste Technologien mit der Analyse jahrhundertealter **tibetischer Handschriften und Drucke**. Entwickle eine KI, die historische Blockdrucke und Manuskripte analysiert, Layouts erkennt und Texte vergleicht. Die Staatsbibliothek zu Berlin stellt einige historische Objekte im Rahmen einer Ausstellung zur Verfügung! Die Teilnehmenden des Hackathons haben exklusiven Zugang zu diesen wertvollen Originaldokumenten und können selbst Bilder erstellen und die Objekte aus nächster Nähe betrachten. So lässt sich die Arbeit mit den digitalen Daten ideal mit den physischen Artefakten kombinieren.
+
+Beim **Skat-Hackathon** entwickelst du in einem Team eine KI, die in der Lage ist, Skat-Karten auf der Hand und auf dem Tisch zu erkennen – und das alles in Echtzeit! Mit Hilfe modernster Objekterkennungsmodelle wie YOLO, SAM2 und GroundingDino erfasst deine KI die Spielkarten und entscheidet, welche Karte als nächstes gespielt werden soll. Mithilfe von leistungsstarken Large Language Models (LLMs), darunter selbst gehostete Open-Source-Modelle, wird deine KI auch die optimale Spielstrategie entwickeln.
+
 Am Ende des Hackathons treten die besten KI-Systeme gegeneinander an – und du hast die Chance auf tolle Preise!
+
+Weitere Details zum Hackathon findest du auf unserer [Webseite](https://ki-dresden.net/ai-insights-saxony-hackathon).
 
 # Getting started
 Das Python Paket kann mit folgendem Befehl installiert werden:
