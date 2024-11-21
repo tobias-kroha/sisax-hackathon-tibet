@@ -1,7 +1,7 @@
 ![Banner](https://github.com/nih23/sisax-hackathon/blob/main/assets/ai-insights-header-1000x505.jpg?raw=true)
 
 
-# Chatbot-Hackathon
+# SiSax Hackathon 👩‍💻
 Der Hackathon besteht aus zwei Richtungen: 
 1. Analyse von Blockdrucken und Handschriften
 2. KI am Tisch: Skat trifft Machine Learning!
@@ -14,6 +14,8 @@ Am Ende des Hackathons treten die besten KI-Systeme gegeneinander an – und du 
 
 Weitere Details zum Hackathon findest du auf unserer [Webseite](https://ki-dresden.net/ai-insights-saxony-hackathon).
 
+
+
 # Getting started
 Das Python Paket kann mit folgendem Befehl installiert werden:
 ```bash
@@ -22,16 +24,43 @@ cd sisax-hackathon
 pip install -e .
 ```
 
-Im `demo_notebook.ipynv` wird Objekterkennung und Interaktion mit einem LLM demonstriert. Es ist zu beachten, dass die entsprechende Keys, Hosts, Ports, etc. in der .env zu spezifizieren sind. Aktuell werden folgende Angaben benötigt:
+Im `demo_notebook.ipynv` und `demo.py` wird Objekterkennung und Interaktion mit einem selbst-gehosteten LLM mit dem sisax Paket. Es ist zu beachten, dass die entsprechende Keys, Hosts, Ports, etc. in der .env zu spezifizieren sind. 
+
+# ML Ressourcen
+Ihr müsst in der `.env` noch die bei [@cloudandheat](https://github.com/cloudandheat) gehosteten Modelle ergänzen, damit der aktuelle Code aus dem Paket verwendet und z.B. `demo.py` ausgeführt werden kann.
 
 ```bash
-OBJECT_DETECTION_HOST=http://...:8000
+OBJECT_DETECTION_HOST=http://185.128.117.252:8000
 OLLAMA_HOST=http://...
 OLLAMA_PORT=11434
 OPENAI_API_KEY=sk-proj-..
 ```
 
-Die Namen der Hosts und API Keys werden am Anfang des Hackathons mitgeteilt.
+Wir stellen zwei selbst-gehostete Compute Nodes mit LLMs zur Verfügung. Standard-LLMs können von `185.128.119.247` benutzt werden. Hierzu zählen:
+
+| Model              | Parameters | Size  | model (for API request)                  |
+| ------------------ | ---------- | ----- | -------------------------------- |
+| Llama 3.2          | 3B         | 2.0GB | llama3.2     |
+| Llama 3.2          | 1B         | 1.3GB | llama3.2:1b     |
+| Llama 3.1          | 8B         | 4.7GB | llama3.1     |
+| Phi 3 Mini         | 3.8B       | 2.3GB | phi3     |
+| Phi 3 Medium       | 14B        | 7.9GB | phi3:medium     |
+| Gemma 2            | 2B         | 1.6GB | gemma2:2b     |
+| Gemma 2            | 9B         | 5.5GB | gemma2     |
+| Mistral            | 7B         | 4.1GB | mistral     |
+| Moondream 2        | 1.4B       | 829MB | moondream     |
+| Neural Chat        | 7B         | 4.1GB | neural-chat     |
+| Starling           | 7B         | 4.1GB | starling-lm     |
+| LLaVA              | 7B         | 4.5GB | llava     |
+| Solar              | 10.7B      | 6.1GB | solar     |
+
+Ein Big-LLM stellen wir über folgenden Host zur Verfügung: `185.128.117.91`. 
+
+| Model              | Parameters | Size  | model (for API request)                  |
+| ------------------ | ---------- | ----- | -------------------------------- |
+| Llama 3.1          | 70B         | ... | llama3.1:70b     |
+
+Die OpenAI API Keys werden zu Beginn des Hackathons mitgeteilt. 
 
 # Next steps
 Ihr könnt das vorliegende Python Paket um weitere Funktionalitän erweitern. Beispielsweise sind folgendes **Features** sinnvoll:

@@ -9,13 +9,12 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Host und Port aus der .env-Datei laden
-ollama_host = os.getenv("OLLAMA_HOST", "http://localhost")  # Standardwert: localhost
+ollama_host = os.getenv("OLLAMA_HOST")  # Standardwert: localhost
 ollama_port = os.getenv("OLLAMA_PORT", "11434")  # Standardwert: 11434
 
-
-def generate_answer_langchain(query, messages=None):
+def generate_answer(query, messages=None, model="llama3.2"):
     """
-    Translates the OpenAI function to LangChain using an Ollama chatbot inference server.
+    communicates with Ollama chatbot inference server.
 
     Args:
         query (str): The question to be answered.
@@ -35,8 +34,8 @@ def generate_answer_langchain(query, messages=None):
     # ChatOllama mit benutzerdefiniertem Host und Port initialisieren
     chat = ChatOllama(
         host=ollama_host,
-        port=int(ollama_port),  # Port muss eine Zahl sein
-        model="gpt-4o",  # Beispielmodell
+        port=int(ollama_port),
+        model=model,
         temperature=0.9
     )
 
@@ -56,7 +55,7 @@ def generate_answer_langchain(query, messages=None):
 
     return response.content
 
-def generate_multimodal_answer(query, image_path, messages=None):
+def generate_multimodal_answer(query, image_path, model="llama3.2", messages=None):
     if messages is None:
         messages = []
 
@@ -65,12 +64,11 @@ def generate_multimodal_answer(query, image_path, messages=None):
     Use the information from the context and the provided image to answer the question.
     If you can't find relevant information in the context, say so."""
 
-    # Initialize the LangChain OpenAI chat model
     # ChatOllama mit benutzerdefiniertem Host und Port initialisieren
     chat = ChatOllama(
         host=ollama_host,
         port=int(ollama_port),  # Port muss eine Zahl sein
-        model="gpt-4o",  # Beispielmodell
+        model=model,  # Beispielmodell
         temperature=0.9
     )
 
