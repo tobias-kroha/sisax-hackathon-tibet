@@ -1,4 +1,5 @@
-![Banner](https://github.com/nih23/sisax-hackathon/blob/main/assets/Banner.jpg?raw=true)
+![Banner](https://github.com/nih23/sisax-hackathon/blob/main/assets/ai-insights-header-1000x505.jpg?raw=true)
+
 
 # Chatbot-Hackathon
 Der Hackathon besteht aus zwei Richtungen: 
