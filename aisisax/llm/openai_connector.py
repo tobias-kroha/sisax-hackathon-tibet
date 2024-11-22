@@ -52,7 +52,7 @@ def generate_multimodal_answer(query, image_path, messages=None, temperature=0.9
     If you can't find relevant information in the context, say so."""
 
     # Initialize the LangChain OpenAI chat model
-    chat = ChatOpenAI(model="gpt-4o", temperature=0.9)
+    chat = ChatOpenAI(model="gpt-4o", temperature=temperature)
 
     # Convert messages to LangChain's format
     formatted_messages = [SystemMessage(content=system_prompt)]
