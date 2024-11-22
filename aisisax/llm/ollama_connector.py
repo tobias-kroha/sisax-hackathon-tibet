@@ -33,8 +33,7 @@ def generate_answer(query, messages=None, model="llama3.2"):
 
     # ChatOllama mit benutzerdefiniertem Host und Port initialisieren
     chat = ChatOllama(
-        host=ollama_host,
-        port=int(ollama_port),
+        base_url=f"{ollama_host}:{ollama_port}",
         model=model,
         temperature=0.9
     )
