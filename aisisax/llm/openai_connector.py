@@ -42,7 +42,7 @@ def generate_answer(query, messages=None):
 
     return response.content
 
-def generate_multimodal_answer(query, image_path, messages=None):
+def generate_multimodal_answer(query, image_path, messages=None, temperature=0.9):
     if messages is None:
         messages = []
 
