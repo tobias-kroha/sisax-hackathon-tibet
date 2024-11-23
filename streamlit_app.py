@@ -122,8 +122,11 @@ def process_images(uploaded_files, progress_bar, log_placeholder):
             logger.debug(f"Filename parts: {filename_parts}")
             ppn = filename_parts[-2] if len(filename_parts) > 1 else "unknown"
             page_number = filename_parts[-1] if len(filename_parts) > 0 else "unknown"
-            # strip extension from page number and convert to int
-            page_number = int(os.path.splitext(page_number)[0])
+            # strip extension from page number and convert to int (if possible)
+            try:
+                page_number = int(os.path.splitext(page_number)[0])
+            except ValueError:
+                page_number = "unknown"
 
             result = aisax_openai.generate_multimodal_answer(
                 st.session_state.ai_prompt,
@@ -183,7 +186,7 @@ Answer the following questions and respond as a pure JSON object the following f
 "Chinese page number" (Bool): Does the image contain at least one chinese character or number, that is vertical oriented and is on the right side of the image outside of the tibet?
 "Arabic numeral present" (Bool): Does the image contain an Arabic numeral?
 "Arabic numeral int" (Integer): If there is an Arabic numeral, which one?
-"Illustration present" (Bool): Does the image contain an illustration?
+"Illustration present" (Bool): Does the image contain an illustration? Round red stamps are not illustrations
 "Illustration position" (String): If the image contains not an illustration return 'none', else return the postion of the illustrated area as 'left', 'right' or 'center'
 "Illustration caption" (Bool): Does the image contain an illustration with a caption?
 "Tibetian page number" (Bool): Does the image contain a tibetian characters, that are vertical oriented and left aligned. If so return 'true', 'false' otherwise
