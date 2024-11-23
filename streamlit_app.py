@@ -131,7 +131,7 @@ def process_images(uploaded_files, progress_bar, log_placeholder):
             result = aisax_openai.generate_multimodal_answer(
                 st.session_state.ai_prompt,
                 image_path=file_path, 
-                temperature=0.5
+                temperature=st.session_state.temperature
             )
 
             # Process the result and convert to JSON
@@ -192,6 +192,8 @@ Answer the following questions and respond as a pure JSON object the following f
 "Tibetian page number" (Bool): Does the image contain a page number in tibetian, that are vertical oriented and left aligned. If so return 'true', 'false' otherwise
 "Frame present" (String): Is there a frame around the Text? Valid options: 'none, 'red', 'black'
 """
+    if 'temperature' not in st.session_state:
+        st.session_state.temperature = 0.5
     
     # Clean up any existing temporary files
     cleanup_temp_files()
@@ -206,12 +208,25 @@ Answer the following questions and respond as a pure JSON object the following f
     
     # Add configuration button and expander
     with st.expander("⚙️ Settings"):
-        st.session_state.jpg_quality = st.slider(
-            "JPG Compression Quality", 
-            1, 100, 
-            st.session_state.jpg_quality,
-            help="Higher value = better quality but larger file size"
-        )
+        col1, col2 = st.columns(2)
+        
+        with col1:
+            st.session_state.jpg_quality = st.slider(
+                "JPG Compression Quality", 
+                1, 100, 
+                st.session_state.jpg_quality,
+                help="Higher value = better quality but larger file size"
+            )
+        
+        with col2:
+            st.session_state.temperature = st.slider(
+                "AI Temperature", 
+                0.0, 1.0, 
+                st.session_state.temperature,
+                step=0.1,
+                help="Higher values make the output more creative but less predictable"
+            )
+        
         st.session_state.ai_prompt = st.text_area(
             "AI Analysis Prompt",
             st.session_state.ai_prompt,
