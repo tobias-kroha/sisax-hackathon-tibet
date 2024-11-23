@@ -5,3 +5,6 @@ Pillow
 langchain-openai
 zipfile36
 python-json-logger
+langchain
+watchdog
+openpyxl
