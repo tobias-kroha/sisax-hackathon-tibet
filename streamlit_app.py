@@ -12,7 +12,7 @@ from mimetypes import guess_type
 from PIL import Image
 
 st.set_page_config(
-    page_title="Tibetan Manuscript Analysis",
+    page_title="AI Manuscript Analysis",
     layout="wide",
     initial_sidebar_state="expanded",
 )
@@ -193,7 +193,7 @@ Answer the following questions and respond as a pure JSON object the following f
     # Clean up any existing temporary files
     cleanup_temp_files()
     
-    st.title("Manuscript Analysis")
+    st.title("AI Manuscript Analysis")
     
     # Initialize session state variables
     if 'processing_started' not in st.session_state:
