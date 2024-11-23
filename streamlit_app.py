@@ -126,22 +126,7 @@ def process_images(uploaded_files, progress_bar, log_placeholder):
             page_number = int(os.path.splitext(page_number)[0])
 
             result = aisax_openai.generate_multimodal_answer(
-                """You are an expert for interpreting Tibetan manuscripts. 
-                Attached you will find an image of a tibetan manuscript. 
-                Answer the following questions and respond as a pure JSON object the following format:
-                {
-                "Chinese character present": "bool (Is there at least one Chinese character or number on the image?)",
-                "Chinese page number": "bool (Does the image contain at least one chinese character or number, that is vertical oriented and is on the right side of the image outside of the tibet?)",
-                "Arabic numeral present": "bool (Does the image contain an Arabic numeral?)",
-                "Arabic numeral int": "Integer (If there is an Arabic numeral, which one?)",
-                "Illustration present": "bool (Does the image contain an illustration?)",   
-                "Illustration position": "string (If the image contains not an illustration say ''None', else return the postion of the illustrated area as 'left', 'right' or 'center'",
-                "Illustration caption": "bool (Does the image contain an illustration with a caption?)",
-                "Tibetian page number": "bool (Does the image contain a tibetian characters, that are vertical oriented and left aligned. If so say 'true', 'false' otherwise.)",
-                "Frame present": "char (Is there a frame around the Text? Valid options: 'none, 'red', 'black'"
-                }
-
-                """, 
+                st.session_state.ai_prompt,
                 image_path=file_path, 
                 temperature=0.5
             )
@@ -152,7 +137,8 @@ def process_images(uploaded_files, progress_bar, log_placeholder):
             result = json.loads(result)
 
             # Add additional metadata
-            result["PPN"] = ppn
+            if ppn.isdigit():
+                result["PPN"] = ppn
             result["Page number"] = page_number
 
             # Store the absolute path
@@ -185,16 +171,50 @@ def cleanup_temp_files():
         st.session_state.temp_files = []
 
 def main():
+    # Initialize session state variables
+    if 'jpg_quality' not in st.session_state:
+        st.session_state.jpg_quality = 70
+    if 'ai_prompt' not in st.session_state:
+        st.session_state.ai_prompt = """You are an expert for interpreting historic manuscripts. Attached you will find an image of a manuscript. 
+
+Answer the following questions and respond as a pure JSON object the following format:
+
+"Chinese character present" (Bool): Is there at least one Chinese character or number on the image
+"Chinese page number" (Bool): Does the image contain at least one chinese character or number, that is vertical oriented and is on the right side of the image outside of the tibet?
+"Arabic numeral present" (Bool): Does the image contain an Arabic numeral?
+"Arabic numeral int" (Integer): If there is an Arabic numeral, which one?
+"Illustration present" (Bool): Does the image contain an illustration?
+"Illustration position" (String): If the image contains not an illustration return 'none', else return the postion of the illustrated area as 'left', 'right' or 'center'
+"Illustration caption" (Bool): Does the image contain an illustration with a caption?
+"Tibetian page number" (Bool): Does the image contain a tibetian characters, that are vertical oriented and left aligned. If so return 'true', 'false' otherwise
+"Frame present" (String): Is there a frame around the Text? Valid options: 'none, 'red', 'black'
+"""
+    
     # Clean up any existing temporary files
     cleanup_temp_files()
     
-    st.title("Tibetan Manuscript Analysis")
+    st.title("Manuscript Analysis")
     
     # Initialize session state variables
     if 'processing_started' not in st.session_state:
         st.session_state.processing_started = False
     if 'processing_complete' not in st.session_state:
         st.session_state.processing_complete = False
+    
+    # Add configuration button and expander
+    with st.expander("⚙️ Configuration Settings"):
+        st.session_state.jpg_quality = st.slider(
+            "JPG Compression Quality", 
+            1, 100, 
+            st.session_state.jpg_quality,
+            help="Higher value = better quality but larger file size"
+        )
+        st.session_state.ai_prompt = st.text_area(
+            "AI Analysis Prompt",
+            st.session_state.ai_prompt,
+            height=400,
+            help="Customize the prompt sent to the AI for image analysis"
+        )
     
     # File uploader
     uploaded_files = st.file_uploader(
