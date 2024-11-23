@@ -189,7 +189,7 @@ Answer the following questions and respond as a pure JSON object the following f
 "Illustration present" (Bool): Does the image contain an illustration? Round red stamps are not illustrations
 "Illustration position" (String): If the image contains not an illustration return 'none', else return the postion of the illustrated area as 'left', 'right' or 'center'
 "Illustration caption" (Bool): Does the image contain an illustration with a caption?
-"Tibetian page number" (Bool): Does the image contain a tibetian characters, that are vertical oriented and left aligned. If so return 'true', 'false' otherwise
+"Tibetian page number" (Bool): Does the image contain a page number in tibetian, that are vertical oriented and left aligned. If so return 'true', 'false' otherwise
 "Frame present" (String): Is there a frame around the Text? Valid options: 'none, 'red', 'black'
 """
     
