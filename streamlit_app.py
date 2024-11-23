@@ -18,7 +18,7 @@ st.set_page_config(
 )
 
 # Configure server to handle larger files
-st._config.set_option('server.maxUploadSize', 1024)  # Size in MB (1024 MB = 1 GB)
+st._config.set_option('server.maxUploadSize', 200)  # Size in MB (1024 MB = 1 GB)
 
 # Configure logging to capture output for display
 class StreamlitHandler(logging.Handler):
@@ -216,12 +216,11 @@ Answer the following questions and respond as a pure JSON object the following f
             help="Customize the prompt sent to the AI for image analysis"
         )
     
-    # File uploader
+    # File uploader (remove max_size parameter)
     uploaded_files = st.file_uploader(
         "Upload manuscript images", 
         accept_multiple_files=True, 
-        type=['zip', 'jpg', 'jpeg', 'png'],
-        max_size=200*1024*1024  # 200MB limit
+        type=['zip', 'jpg', 'jpeg', 'png']
     )
 
     if uploaded_files:
