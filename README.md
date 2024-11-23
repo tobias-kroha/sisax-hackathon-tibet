@@ -22,5 +22,5 @@ streamlit run streamlit_app.py
 
 .jpg
 .png
-.zip in the format provided byhttps://digital.staatsbibliothek-berlin.de/suche?category%5B0%5D=Tibetica&structure_type%5B0%5D=manuscript&queryString=&fulltext=&junction=&results_on_page=20&sort_on=relevance&sort_direction=desc
+.zip in the format provided by https://digital.staatsbibliothek-berlin.de/suche?category%5B0%5D=Tibetica&structure_type%5B0%5D=manuscript&queryString=&fulltext=&junction=&results_on_page=20&sort_on=relevance&sort_direction=desc
 
