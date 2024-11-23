@@ -202,7 +202,7 @@ Answer the following questions and respond as a pure JSON object the following f
         st.session_state.processing_complete = False
     
     # Add configuration button and expander
-    with st.expander("⚙️ Configuration Settings"):
+    with st.expander("⚙️ Settings"):
         st.session_state.jpg_quality = st.slider(
             "JPG Compression Quality", 
             1, 100, 
