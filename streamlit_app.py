@@ -219,8 +219,9 @@ Answer the following questions and respond as a pure JSON object the following f
     # File uploader
     uploaded_files = st.file_uploader(
         "Upload manuscript images", 
-        accept_multiple_files=True,
-        type=['zip', 'jpg', 'jpeg', 'png']
+        accept_multiple_files=True, 
+        type=['zip', 'jpg', 'jpeg', 'png'],
+        max_size=200*1024*1024  # 200MB limit
     )
 
     if uploaded_files:
