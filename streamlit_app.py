@@ -10,6 +10,9 @@ import aisisax.llm.openai_connector as aisax_openai
 import json
 from mimetypes import guess_type
 from PIL import Image
+import subprocess
+
+__version__ = "0.5"
 
 st.set_page_config(
     page_title="AI Manuscript Analysis",
@@ -210,6 +213,7 @@ Answer the following questions and respond as a pure JSON object the following f
     
     st.title("AI Manuscript Analysis")
     
+    
     # Initialize session state variables
     if 'processing_started' not in st.session_state:
         st.session_state.processing_started = False
@@ -341,6 +345,10 @@ Answer the following questions and respond as a pure JSON object the following f
                 st.session_state.df = None
                 cleanup_temp_files()
                 st.rerun()
+
+    st.markdown("""---""")
+    st.markdown(f"<p style='text-align: right; color: grey; font-size: 11px;'>Version v{__version__}</p>", unsafe_allow_html=True)
+            
 
 if __name__ == "__main__":
     main() 
