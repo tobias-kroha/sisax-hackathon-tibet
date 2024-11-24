@@ -12,7 +12,7 @@ from mimetypes import guess_type
 from PIL import Image
 import subprocess
 
-__version__ = "0.5"
+__version__ = "0.51"
 
 st.set_page_config(
     page_title="AI Manuscript Analysis",
