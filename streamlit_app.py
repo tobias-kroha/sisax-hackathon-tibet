@@ -206,7 +206,7 @@ Answer the following questions and respond as a pure JSON object the following f
     if 'openai_api_key' not in st.session_state:
         st.session_state.openai_api_key = None
     if 'model' not in st.session_state:
-        st.session_state.model = "gpt-4o-mini"  # Default model
+        st.session_state.model = "gpt-4o"  # Default model
     
     # Clean up any existing temporary files
     cleanup_temp_files()
