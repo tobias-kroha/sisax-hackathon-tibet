@@ -113,7 +113,7 @@ def process_images(uploaded_files, progress_bar, log_placeholder):
     # Process all files
     for i, file_path in enumerate(all_files):
         filename = os.path.basename(file_path)
-        logger.info(f"Processing {filename} Size: {os.path.getsize(file_path) / 1024:.2f} KB")
+        logger.info(f"Processing {filename} Size: {os.path.getsize(file_path) / 1024:.2f} KB with model {st.session_state.model}, temperature {st.session_state.temperature}")
 
         try:
             # Extract ppn and page number from filename
@@ -131,7 +131,9 @@ def process_images(uploaded_files, progress_bar, log_placeholder):
             result = aisax_openai.generate_multimodal_answer(
                 st.session_state.ai_prompt,
                 image_path=file_path, 
-                temperature=st.session_state.temperature
+                temperature=st.session_state.temperature,
+                api_key=st.session_state.openai_api_key,
+                model=st.session_state.model
             )
 
             # Process the result and convert to JSON
@@ -194,6 +196,10 @@ Answer the following questions and respond as a pure JSON object the following f
 """
     if 'temperature' not in st.session_state:
         st.session_state.temperature = 0.5
+    if 'openai_api_key' not in st.session_state:
+        st.session_state.openai_api_key = None
+    if 'model' not in st.session_state:
+        st.session_state.model = "gpt-4o-mini"  # Default model
     
     # Clean up any existing temporary files
     cleanup_temp_files()
@@ -208,7 +214,7 @@ Answer the following questions and respond as a pure JSON object the following f
     
     # Add configuration button and expander
     with st.expander("⚙️ Settings"):
-        col1, col2 = st.columns(2)
+        col1, col2, col3 = st.columns(3)  # Changed to 3 columns
         
         with col1:
             st.session_state.jpg_quality = st.slider(
@@ -226,6 +232,23 @@ Answer the following questions and respond as a pure JSON object the following f
                 step=0.1,
                 help="Higher values make the output more creative but less predictable"
             )
+        
+        with col3:
+            st.session_state.model = st.selectbox(
+                "AI Model",
+                options=["gpt-4o", "chatgpt-4o-latest", "gpt-4o-mini"],
+                index=2,  # Default to gpt-4o-mini
+                help="Select the AI model to use for analysis"
+            )
+        
+        # API key input
+        api_key = st.text_input(
+            "OpenAI API Key (optional)", 
+            type="password",
+            help="Enter your OpenAI API key. If left empty, the default key will be used."
+        )
+        # Update session state based on input
+        st.session_state.openai_api_key = api_key if api_key.strip() else None
         
         st.session_state.ai_prompt = st.text_area(
             "AI Analysis Prompt",

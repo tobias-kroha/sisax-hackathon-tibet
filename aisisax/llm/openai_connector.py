@@ -42,17 +42,20 @@ def generate_answer(query, messages=None):
 
     return response.content
 
-def generate_multimodal_answer(query, image_path, messages=None, temperature=0.9):
+def generate_multimodal_answer(query, image_path, messages=None, temperature=0.9, api_key=None, model="gpt-4o-mini"):
     if messages is None:
         messages = []
+
+    # Use provided API key if available and not empty, otherwise use default from env
+    if api_key and api_key.strip():
+        chat = ChatOpenAI(api_key=api_key, model=model, temperature=temperature)
+    else:
+        chat = ChatOpenAI(model=model, temperature=temperature)  # Uses default API key from env
 
     # Define the system prompt
     system_prompt = """You are a multi-modal assistant that answers questions based on the provided context. 
     Use the information from the context and the provided image to answer the question.
     If you can't find relevant information in the context, say so."""
-
-    # Initialize the LangChain OpenAI chat model
-    chat = ChatOpenAI(model="gpt-4o", temperature=temperature)
 
     # Convert messages to LangChain's format
     formatted_messages = [SystemMessage(content=system_prompt)]
