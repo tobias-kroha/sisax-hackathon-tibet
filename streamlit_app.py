@@ -245,7 +245,7 @@ Answer the following questions and respond as a pure JSON object the following f
             st.session_state.model = st.selectbox(
                 "AI Model",
                 options=["gpt-4o", "chatgpt-4o-latest", "gpt-4o-mini"],
-                index=2,  # Default to gpt-4o-mini
+                index=0,  # Default to gpt-4o
                 help="Select the AI model to use for analysis"
             )
         
