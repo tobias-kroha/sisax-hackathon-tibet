@@ -180,7 +180,11 @@ def main():
     if 'jpg_quality' not in st.session_state:
         st.session_state.jpg_quality = 70
     if 'ai_prompt' not in st.session_state:
-        st.session_state.ai_prompt = """You are an expert for interpreting historic manuscripts. Attached you will find an image of a manuscript. 
+        st.session_state.ai_prompt = """You are an expert for interpreting Tibetan manuscripts. 
+Attached you will find an image of a Tibetan manuscript. Use your expertise to analyze the image and provide responses. The analysis should specifically account for the presence of Tibetan, Chinese, and Arabic numerals, as well as structural and illustrative elements. Consider the following charsets for enhanced accuracy:
+Tibetan script (U+0F00–U+0FFF): Including Tibetan characters, numerals (e.g., ཀ, ཁ, ག, ༡, ༢, ༣), and annotations.
+Chinese characters (U+4E00–U+9FFF): Traditional and simplified forms.
+Arabic numerals (0–9): Standard decimal numbers.
 
 Answer the following questions and respond as a pure JSON object the following format:
 
@@ -192,7 +196,7 @@ Answer the following questions and respond as a pure JSON object the following f
 "Illustration position" (String): If the image contains not an illustration return 'none', else return the postion of the illustrated area as 'left', 'right' or 'center'
 "Illustration caption" (Bool): Does the image contain an illustration with a caption?
 "Tibetian page number" (Bool): Does the image contain a page number in tibetian, that are vertical oriented and left aligned. If so return 'true', 'false' otherwise
-"Frame present" (String): Is there a frame around the Text? Valid options: 'none, 'red', 'black'
+"Frame present" (String): Analyze the image to detect vertical lines framing the text. The lines may be thin, uniform, and either red or black. Respond with one of the following: None if no lines are present, Red if red lines are detected, or Black if black lines are detected
 """
     if 'temperature' not in st.session_state:
         st.session_state.temperature = 0.5
